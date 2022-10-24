@@ -4,66 +4,46 @@ class BinaryTreeNode:
         self.left_child = None
         self.right_child = None
 
-class BST:
-    def insert(root, data) -> BinaryTreeNode:
-        """If binary search tree is empty, make a new node, declare it as root and return the root.
-            If tree is not empty and if new_value is less than value of data in root, add it to left subtree and proceed recursively.
-            If tree is not empty and if new_value is >= value of data in root, add it to right subtree and proceed recursively.
-            Finally, return the root.
-            """
-        # Write your code here
-        if root==None:
-                new_node=node(key)
-                self.root=new_node
-                return self.root
-            if self.root>data:
-                self.root.left=self.insert(self.root.left,data)
 
+def insert(root, new_value) -> BinaryTreeNode:
+    if (root == None):
+        root = BinaryTreeNode(new_value)
+        return root
+    else:
+        if root.data > new_value:
+            if root.left_child is None:
+                new_node = BinaryTreeNode(new_value)
+                root.left_child = new_node
             else:
-                self.root.right=self.insert(self.root.right,data)
+                insert(root.left_child,new_value)
+
+        else:
+            if root.right_child is None:
+                new_node = BinaryTreeNode(new_value)
+                root.right_child = new_node
+            else:
+                insert(root.right_child,new_value)
+
+def inorder(root) -> None:
+    if root:
+        inorder(root.left_child)
+        print(root.data, end = " ")
+        inorder(root.right_child)
 
 
-    def inorder(root) -> None:
-        # Write your code here
-        if root:
-            inorder(root.left)
- 
-        # then print the data of node
-            print(root.data)
- 
-        # now recur on right child
-           inorder(root.right)
+def preorder(root) -> None:
+    if root:
+        print(root.data, end = " ")
+        preorder(root.left_child)
+        preorder(root.right_child)
 
 
-    def preorder(root) -> None:
-        # Write your code here
-        if root:
- 
-        # First print the data of node
-            print(root.data)
- 
-        # Then recur on left child
-            preorder(root.left)
- 
-        # Finally recur on right child
-            preorder(root.right)
+def postorder(root) -> None:
+    if root:
+        postorder(root.left_child)
+        postorder(root.right_child)
+        print(root.data, end = " ")
 
-
-    def postorder(root) -> None:
-        # Write your code here
-        if root:
- 
-        # First recur on left child
-            postorder(root.left)
- 
-        # the recur on right child
-            postorder(root.right)
- 
-        # now print the data of node
-            print(root.data)
-
-
-# Do not change the following code
 input_data = input()
 flag = True
 root = None
